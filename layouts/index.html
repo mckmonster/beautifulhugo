@@ -8,8 +8,9 @@
           </div>
         {{ end }}
 
+        {{ $paginator :=  .Paginate ( where .Pages "Type" "in" site.Params.mainSections ) }}
         <div class="posts-list">
-          {{ range where .Paginator.Pages "Type" "post" }}
+          {{ range $paginator.Pages }}
             <article class="post-preview">
               <a href="{{ .Permalink }}">
                 <h2 class="post-title">{{ .Title }}</h2>
@@ -44,16 +45,16 @@
           {{ end }}
         </div>
 
-        {{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+        {{ if or ($paginator.HasPrev) ($paginator.HasNext) }}
           <ul class="pager main-pager">
             {{ if .Paginator.HasPrev }}
               <li class="previous">
-                <a href="{{ .Permalink }}page/{{ .Paginator.Prev.PageNumber }}/">&larr; {{ i18n "newerPosts" }}</a>
+                <a href="{{ .Permalink }}page/{{ $paginator.Prev.PageNumber }}/">&larr; {{ i18n "newerPosts" }}</a>
               </li>
             {{ end }}
-            {{ if .Paginator.HasNext }}
+            {{ if $paginator.HasNext }}
               <li class="next">
-                <a href="{{ .Permalink }}page/{{ .Paginator.Next.PageNumber }}/">{{ i18n "olderPosts" }} &rarr;</a>
+                <a href="{{ .Permalink }}page/{{ $paginator.Next.PageNumber }}/">{{ i18n "olderPosts" }} &rarr;</a>
               </li>
             {{ end }}
           </ul>
