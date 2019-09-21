@@ -18,7 +18,6 @@
             </a>
             <div id="collapse{{ $value.Name }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $value.Name }}">
               <div class="panel-body">
-                {{ $.Site.LanguagePrefix | absURL }}
                 <a href="{{ $.Site.LanguagePrefix | absURL }}/{{ $data.Plural }}/{{ $value.Name | urlize }}/" class="list-group-item view-all">
                 View all</a>
                 <div class="list-group">
